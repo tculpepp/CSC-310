@@ -16,12 +16,12 @@ public class TaxesToFile {
         int year = cal.get(Calendar.YEAR);
         String millisec = String.valueOf(cal.get(Calendar.MILLISECOND));
         boolean saveAnother = true; //control to run again or exit
-        int yearsToCollect = 3;
+        String userInput; //temporary holding for user input
+        int yearsToCollect = 3; // number fo years of data to collect
 
         HashMap<Integer,String> taxesHM=new HashMap<Integer,String>();
 
         for (int i = 0; i < yearsToCollect; i++) {
-            String userInput; //temporary holding for user input
             int currentYear=year-i;
             userInput = JOptionPane.showInputDialog("Enter your taxes paid for " + currentYear + ":");
             taxesHM.put(currentYear, userInput);
