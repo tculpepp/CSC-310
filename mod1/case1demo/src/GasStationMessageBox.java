@@ -24,7 +24,8 @@ public class GasStationMessageBox {
             }
             else if (gasGrade == 'R'|| gasGrade =='r')
             {
-                custInput = JOptionPane.showInputDialog("How many gallons of gas you want to purchase? total = regularPrice * Double.parseDouble(custInput");
+                custInput = JOptionPane.showInputDialog("How many gallons of gas you want to purchase?");
+                total = regularPrice * Double.parseDouble(custInput);
                 JOptionPane.showMessageDialog(null,"Total is $" + total + ". Thank you for your business");
             }
             else if (gasGrade == 'P'|| gasGrade == 'p')
