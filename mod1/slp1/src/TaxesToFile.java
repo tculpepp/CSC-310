@@ -7,31 +7,60 @@
 
 import javax.swing.JOptionPane;
 import java.util.Calendar;
+import java.util.*;
 import java.io.*;
 
 public class TaxesToFile {
     public static void main(String[] args) throws Exception {
-        boolean saveAnother = true; //control to run again or exit
-        String userInput; //temporary holding for user input
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
+        String millisec = String.valueOf(cal.get(Calendar.MILLISECOND));
+        boolean saveAnother = true; //control to run again or exit
+        int yearsToCollect = 3;
 
-        while (saveAnother) {
-            userInput = JOptionPane.showInputDialog("Enter your taxes paid for " + year + ":");
-            //put the taxes into an array here
+        HashMap<Integer,String> taxesHM=new HashMap<Integer,String>();
 
-
-            File file = new File("taxes_paid.txt")
-            file.createNewFile();
-            
-            FileWriter writer = new FileWriter(file); 
-            
-            // Writes the content to the file
-            writer.write(userInput); 
-            writer.flush();
-            writer.close();
-
-            saveAnother = false;
+        for (int i = 0; i < yearsToCollect; i++) {
+            String userInput; //temporary holding for user input
+            int currentYear=year-i;
+            userInput = JOptionPane.showInputDialog("Enter your taxes paid for " + currentYear + ":");
+            taxesHM.put(currentYear, userInput);
         }
+
+        BufferedWriter bf = null;
+        File file = new File("TaxesPaid-" + millisec + ".txt"); //create a new file object
+
+        try {
+
+            // create new BufferedWriter for the output file
+            bf = new BufferedWriter(new FileWriter(file));
+            bf.write("Taxes paid:\n");
+
+            // iterate the hashmap
+            for (Map.Entry<Integer, String> entry :
+                taxesHM.entrySet()) {
+
+                // put key and value separated by a colon
+                bf.write(entry.getKey() + ": $" + entry.getValue());
+
+                // new line
+                bf.newLine();
+            }
+
+            bf.flush();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            // customize this catch block
+        }
+        finally {
+
+            try {
+                bf.close(); // close the writer when done
+            }
+            catch (Exception e) {
+            }
+        }
+        JOptionPane.showMessageDialog(null, "Taxes paid saved to: " + file);
     }
 }
