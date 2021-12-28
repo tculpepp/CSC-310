@@ -27,7 +27,8 @@
 		"peacock.color": "#1857a4",
 		"java.project.sourcePaths": [
 			"mod1/case1demo/src",
-			"mod1/case1/src"
+			"mod1/case1/src",
+			"mod1/slp1/src"
 		]
 	}
 }
