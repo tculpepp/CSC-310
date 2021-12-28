@@ -15,7 +15,6 @@ public class TaxesToFile {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
         String millisec = String.valueOf(cal.get(Calendar.MILLISECOND));
-        boolean saveAnother = true; //control to run again or exit
         String userInput; //temporary holding for user input
         int yearsToCollect = 3; // number fo years of data to collect
 
