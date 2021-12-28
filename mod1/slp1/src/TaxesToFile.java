@@ -58,7 +58,8 @@ public class TaxesToFile {
             try {
                 bf.close(); // close the writer when done
             }
-            catch (Exception e) {
+            catch (IOException e) {
+                e.printStackTrace();
             }
         }
         JOptionPane.showMessageDialog(null, "Taxes paid saved to: " + file);
