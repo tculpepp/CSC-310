@@ -4,63 +4,66 @@
 // 2. Write this information to a text file.
 
 // Once you finish the assignment, copy the Java program along with a screenshot of the output and paste it into a Word document. Submit the Word document to the SLP 1 dropbox.
+/**
+* The TaxesToFile program implements an application that
+* simply requests taxes paid for a number of years from the
+* user and then writes that data out to a file.
+*
+* Assignment: CSC310 Mod 1 SLP
+*
+* @author  Thomas Culpepper
+* @version 1.0
+* @since   2021-12-28
+*/
 
 import javax.swing.JOptionPane;
 import java.util.Calendar;
 import java.util.*;
+import java.util.regex.*;
 import java.io.*;
-
 public class TaxesToFile {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
-        String millisec = String.valueOf(cal.get(Calendar.MILLISECOND));
+        String millisec = String.valueOf(cal.get(Calendar.MILLISECOND)); // added to filename to ensure uniqueness
         String userInput; //temporary holding for user input
         int yearsToCollect = 3; // number fo years of data to collect
+        HashMap<Integer,String> taxesHM=new HashMap<>(); // to hold year and taxes paid data
 
-        HashMap<Integer,String> taxesHM=new HashMap<Integer,String>();
-
+        // sequentially request taxes paid from the user starting with current year and going backwards as required
         for (int i = 0; i < yearsToCollect; i++) {
             int currentYear=year-i;
             userInput = JOptionPane.showInputDialog("Enter your taxes paid for " + currentYear + ":");
+            Pattern p = Pattern.compile("[A-Z,a-z,&%$#@!()*^]"); // allows only 0-9 and .
+            Matcher m = p.matcher(userInput);
+            //If something other than a number was entered, notify the user and continue
+            if (m.find()){ 
+                JOptionPane.showMessageDialog(null, "Please enter only a number");
+                i--;
+                continue;
+            }
             taxesHM.put(currentYear, userInput);
         }
 
-        BufferedWriter bf = null;
-        File file = new File("TaxesPaid-" + millisec + ".txt"); //create a new file object
-
-        try {
-
-            // create new BufferedWriter for the output file
-            bf = new BufferedWriter(new FileWriter(file));
-            bf.write("Taxes paid:\n");
+        String outfile = ("TaxesPaid-" + millisec + ".txt");
+        
+        // Open the writer with a transparent buffer to read the hashmap into
+        try(Writer writer = new BufferedWriter(new FileWriter(outfile));){
+            writer.write("Taxes paid:\n");
 
             // iterate the hashmap
             for (Map.Entry<Integer, String> entry :
                 taxesHM.entrySet()) {
-
                 // put key and value separated by a colon
-                bf.write(entry.getKey() + ": $" + entry.getValue());
-
-                // new line
-                bf.newLine();
+                writer.write(entry.getKey() + ": $" + entry.getValue());
+                writer.write(System.lineSeparator());
             }
 
-            bf.flush();
+            writer.flush();
         }
         catch (IOException e) {
             e.printStackTrace();
-            // customize this catch block
         }
-        finally {
-
-            try {
-                bf.close(); // close the writer when done
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        JOptionPane.showMessageDialog(null, "Taxes paid saved to: " + file);
+        JOptionPane.showMessageDialog(null, "Taxes paid saved to: " + outfile);
     }
 }
