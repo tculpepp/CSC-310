@@ -5,28 +5,42 @@
 * Your program must catch user input errors. As the examples given above, use a dialog window 
 * to enter program input instead of console-based commands.
  */
+
+ /**
+* The CalcTaxes program implements an application that requests tax information 
+* from the user and then calculates taxes due.
+*
+* Assignment: CSC310 Mod 1 Case
+*
+* @author  Thomas Culpepper
+* @version 1.0
+* @since   2021-12-28
+*/
 import javax.swing.JOptionPane;
 import java.util.regex.*;
 
 public class CalcTaxes {
     public static void main(String[] args) {
         boolean calcAgain = true; //control to run again or exit
-        String validationPattern;
-        String errorMessage;
-        String[] userInputs = new String[4];
-        String[][] inputRequests = {
-            {"Please enter your name:","str"},
-            {"Enter your yearly income","num"},
-            {"Enter your Federal tax rate (%):","num"},
-            {"Enter your State tax rate (%):","num"}
-        };
 
         JOptionPane.showMessageDialog(null, "This program will calculate your federal and state taxes");
 
         while (calcAgain) {
+            String validationPattern = null;
+            String errorMessage = null;
+            String[] userInputs = new String[4]; //array to hold input strings
+            String[][] inputRequests = {
+                {"Please enter your name:","str"},
+                {"Enter your yearly income","num"},
+                {"Enter your Federal tax rate (%):","num"},
+                {"Enter your State tax rate (%):","num"}
+            };
             for (int i=0; i < inputRequests.length; i++) {
-                userInputs[i] = JOptionPane.showInputDialog(inputRequests[i][0], JOptionPane.QUESTION_MESSAGE);
-                if (inputRequests[i][1].equals("num")){
+                userInputs[i] = JOptionPane.showInputDialog(inputRequests[i][0]);
+                if (userInputs[i] == null) { // Exit cleanly if user hits cancel
+                    System.exit(0);
+                }
+                else if (inputRequests[i][1].equals("num")){
                     validationPattern = "[A-Za-z&%$#@!()*^, ]"; // allows only numbers plus , .
                     errorMessage = "Please enter a number";
                 }
@@ -43,7 +57,6 @@ public class CalcTaxes {
                 if (m.find() || userInputs[i].isBlank()){ 
                     JOptionPane.showMessageDialog(null, errorMessage);
                     i--;
-                    continue;
                 }
             }
 
@@ -56,7 +69,7 @@ public class CalcTaxes {
             JOptionPane.showMessageDialog(null, userInputs[0] + "\nYour Federal Taxes are: $" + fedTaxDue + "\nYour State taxes are: $" + stateTaxDue);
 
             int reply = JOptionPane.showConfirmDialog(null, "Would you like to calculate more?", "Run Again?",  JOptionPane.YES_NO_OPTION);
-            if (reply != JOptionPane.YES_OPTION) {
+            if (reply == JOptionPane.NO_OPTION) {
                     calcAgain = false;
             }
         }

@@ -1,7 +1,6 @@
 /**
-* The TaxesToFile program implements an application that
-* simply requests taxes paid for a number of years from the
-* user and then writes that data out to a file.
+* The TaxesToFile program implements an application that requests taxes paid
+* for a number of years from the user and then writes that data out to a file.
 *
 * Assignment: CSC310 Mod 1 SLP
 *
@@ -17,15 +16,13 @@ import java.io.*;
 public class TaxesToFile {
     public static void main(String[] args) {
         Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        String millisec = String.valueOf(cal.get(Calendar.MILLISECOND)); // added to filename to ensure uniqueness
         String userInput; //temporary holding for user input
         int yearsToCollect = 3; // number fo years of data to collect
         String[] taxesPaidArray = new String[3]; // array to hold user inputs
 
         // request taxes paid from the user starting with current year and going backwards as required by yearsToCollect
         for (int i = 0; i < yearsToCollect; i++) {
-            int currentYear=year-i;
+            int currentYear = (cal.get(Calendar.YEAR)) - 1;
             userInput = JOptionPane.showInputDialog("Enter your taxes paid for " + currentYear + ":");
             // validate the user input. If Invalid, notify and repeat iteration
             Pattern p = Pattern.compile("[A-Za-z&%$#@!()*^ ]"); // allows only numbers plus , .
@@ -38,6 +35,7 @@ public class TaxesToFile {
             taxesPaidArray[i] = (String.valueOf(currentYear) + ": $" + userInput);
         }
 
+        String millisec = String.valueOf(cal.get(Calendar.MILLISECOND)); // added to filename to ensure uniqueness
         String outfile = ("TaxesPaid-" + millisec + ".txt");
         
         // Open the writer with a transparent buffer to read the array into
