@@ -30,7 +30,7 @@ public class TaxesToFile {
             // validate the user input. If Invalid, notify and repeat iteration
             Pattern p = Pattern.compile("[A-Za-z&%$#@!()*^ ]"); // allows only numbers plus , .
             Matcher m = p.matcher(userInput);
-            if (m.find() || userInput.isEmpty()){ 
+            if (m.find() || userInput.isBlank()){ 
                 JOptionPane.showMessageDialog(null, "Please enter a number");
                 i--;
                 continue;
