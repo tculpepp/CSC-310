@@ -1,11 +1,3 @@
-/* 
-* Write a Java application to calculate how much federal and state tax you need to pay. 
-* The program should accomplish the following tasks: ask your name, yearly income, federal 
-* tax rate, and state tax rate, then calculate and display the amount of tax you need to pay. 
-* Your program must catch user input errors. As the examples given above, use a dialog window 
-* to enter program input instead of console-based commands.
- */
-
  /**
 * The CalcTaxes program implements an application that requests tax information 
 * from the user and then calculates taxes due.
@@ -28,8 +20,8 @@ public class CalcTaxes {
         while (calcAgain) {
             String validationPattern = null;
             String errorMessage = null;
-            String[] userInputs = new String[4]; //array to hold input strings
-            String[][] inputRequests = {
+            String [] userInputs = new String[4]; //array to hold input strings
+            String [][] inputRequests = {
                 {"Please enter your name:","str"},
                 {"Enter your yearly income","num"},
                 {"Enter your Federal tax rate (%):","num"},
@@ -52,6 +44,7 @@ public class CalcTaxes {
                     JOptionPane.showMessageDialog(null, "Illegal Input type Option. Please contact the developer.");
                     throw new IllegalArgumentException("Input type option invalid. Only 'num' or 'str' allowed");
                 }
+
                 Pattern p = Pattern.compile(validationPattern);
                 Matcher m = p.matcher(userInputs[i]);
                 if (m.find() || userInputs[i].isBlank()){ 
@@ -66,9 +59,11 @@ public class CalcTaxes {
             double fedTaxDue = yearlyIncome * fedTaxRate;
             double stateTaxDue = yearlyIncome * stateTaxRate;
 
-            JOptionPane.showMessageDialog(null, userInputs[0] + "\nYour Federal Taxes are: $" + fedTaxDue + "\nYour State taxes are: $" + stateTaxDue);
+            JOptionPane.showMessageDialog(null, userInputs[0] + "\nYour Federal Taxes are: $" 
+                + fedTaxDue + "\nYour State taxes are: $" + stateTaxDue);
 
-            int reply = JOptionPane.showConfirmDialog(null, "Would you like to calculate more?", "Run Again?",  JOptionPane.YES_NO_OPTION);
+            int reply = JOptionPane.showConfirmDialog(null, "Would you like to calculate more?", 
+                "Run Again?",  JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.NO_OPTION) {
                     calcAgain = false;
             }

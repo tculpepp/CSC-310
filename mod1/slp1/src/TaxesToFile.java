@@ -53,6 +53,7 @@ public class TaxesToFile {
         catch (IOException e) {
             e.printStackTrace();
         }
+        
         JOptionPane.showMessageDialog(null, "Taxes paid saved to: " + outfile);
     }
 }

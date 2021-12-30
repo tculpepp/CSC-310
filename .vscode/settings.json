@@ -4,5 +4,6 @@
         "millisec",
         "outfile",
         "regularPrice"
-    ]
+    ],
+    "java.checkstyle.configuration": "/google_checks.xml"
 }
