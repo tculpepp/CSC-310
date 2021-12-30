@@ -15,13 +15,14 @@ public class CalcTaxes {
     public static void main(String[] args) {
         boolean calcAgain = true; //control to run again or exit
 
-        JOptionPane.showMessageDialog(null, "This program will calculate your federal and state taxes");
+        JOptionPane.showMessageDialog(
+            null, "This program will calculate your federal and state taxes");
 
         while (calcAgain) {
             String validationPattern = null;
             String errorMessage = null;
-            String [] userInputs = new String[4]; //array to hold input strings
-            String [][] inputRequests = {
+            String [] userInputs = new String[4]; //array to hold user input strings
+            String [][] inputRequests = { //input requests and expected type (num or str)
                 {"Please enter your name:","str"},
                 {"Enter your yearly income","num"},
                 {"Enter your Federal tax rate (%):","num"},
@@ -33,21 +34,23 @@ public class CalcTaxes {
                     System.exit(0);
                 }
                 else if (inputRequests[i][1].equals("num")){
-                    validationPattern = "[A-Za-z&%$#@!()*^, ]"; // allows only numbers plus , .
-                    errorMessage = "Please enter a number";
+                    validationPattern = "^\\d+$|^-?\\d*\\.\\d{2}$"; // match integer or 2 place decimal
+                    errorMessage = "Please enter a number \n(000 or 00.00)";
                 }
                 else if (inputRequests[i][1].equals("str")) {
-                    validationPattern = "[0-9&%$#@!()*^]"; // allows only letters and spaces
-                    errorMessage = "No numbers or special characters please";
+                    validationPattern = "^[A-Za-z]+\\s*[A-Za-z]*$"; // match name and optional 2nd name
+                    errorMessage = "Try again./nNo numbers or symbols please";
                 }
                 else {
-                    JOptionPane.showMessageDialog(null, "Illegal Input type Option. Please contact the developer.");
-                    throw new IllegalArgumentException("Input type option invalid. Only 'num' or 'str' allowed");
+                    JOptionPane.showMessageDialog(
+                        null, "Illegal Input type Option. Please contact the developer.");
+                    throw new IllegalArgumentException(
+                        "Input type option invalid. Only 'num' or 'str' allowed");
                 }
 
                 Pattern p = Pattern.compile(validationPattern);
                 Matcher m = p.matcher(userInputs[i]);
-                if (m.find() || userInputs[i].isBlank()){ 
+                if (!m.find()){ 
                     JOptionPane.showMessageDialog(null, errorMessage);
                     i--;
                 }

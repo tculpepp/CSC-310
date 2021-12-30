@@ -16,26 +16,31 @@ import java.io.*;
 public class TaxesToFile {
     public static void main(String[] args) {
         Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
         String userInput; //temporary holding for user input
         int yearsToCollect = 3; // number fo years of data to collect
         String[] taxesPaidArray = new String[3]; // array to hold user inputs
 
-        // request taxes paid from the user starting with current year and going backwards as required by yearsToCollect
+        // request taxes paid from the user starting with current year and going backwards as 
+        //required by yearsToCollect
         for (int i = 0; i < yearsToCollect; i++) {
-            int currentYear = (cal.get(Calendar.YEAR)) - 1;
+            int currentYear = (year - i);
             userInput = JOptionPane.showInputDialog("Enter your taxes paid for " + currentYear + ":");
+            if (userInput == null) { // Exit cleanly if user hits cancel
+                System.exit(0);
+            }
             // validate the user input. If Invalid, notify and repeat iteration
-            Pattern p = Pattern.compile("[A-Za-z&%$#@!()*^ ]"); // allows only numbers plus , .
+            Pattern p = Pattern.compile("^-?\\d*\\.\\d{2}$"); //only allow 2 place decimal
             Matcher m = p.matcher(userInput);
-            if (m.find() || userInput.isBlank()){ 
-                JOptionPane.showMessageDialog(null, "Please enter a number");
+            if (!m.find() || userInput.isBlank()){ 
+                JOptionPane.showMessageDialog(null, "Please enter a decimal number \n(00.00)");
                 i--;
                 continue;
             }
             taxesPaidArray[i] = (String.valueOf(currentYear) + ": $" + userInput);
         }
 
-        String millisec = String.valueOf(cal.get(Calendar.MILLISECOND)); // added to filename to ensure uniqueness
+        String millisec = String.valueOf(cal.get(Calendar.MILLISECOND)); // to make unique filename
         String outfile = ("TaxesPaid-" + millisec + ".txt");
         
         // Open the writer with a transparent buffer to read the array into
@@ -53,7 +58,7 @@ public class TaxesToFile {
         catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         JOptionPane.showMessageDialog(null, "Taxes paid saved to: " + outfile);
     }
 }

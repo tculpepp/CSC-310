@@ -29,6 +29,11 @@
 			"mod1/case1demo/src",
 			"mod1/case1/src",
 			"mod1/slp1/src"
+		],
+		"java.project.referencedLibraries": [
+			"lib/**/*.jar",
+			"mod1/slp1/lib/junit-platform-console-standalone-1.8.2.jar",
+			"junit-platform-console-standalone-1.8.2.jar"
 		]
 	}
 }
