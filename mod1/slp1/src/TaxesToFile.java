@@ -18,7 +18,7 @@
 
 import javax.swing.JOptionPane;
 import java.util.Calendar;
-import java.util.*;
+// import java.util.*;
 import java.util.regex.*;
 import java.io.*;
 public class TaxesToFile {
@@ -28,7 +28,7 @@ public class TaxesToFile {
         String millisec = String.valueOf(cal.get(Calendar.MILLISECOND)); // added to filename to ensure uniqueness
         String userInput; //temporary holding for user input
         int yearsToCollect = 3; // number fo years of data to collect
-        HashMap<Integer,String> taxesHM=new HashMap<>(); // to hold year and taxes paid data
+        String[] taxesPaidArray = new String[3]; // array to hold user inputs
 
         // sequentially request taxes paid from the user starting with current year and going backwards as required
         for (int i = 0; i < yearsToCollect; i++) {
@@ -42,22 +42,20 @@ public class TaxesToFile {
                 i--;
                 continue;
             }
-            taxesHM.put(currentYear, userInput);
+            taxesPaidArray[i] = (String.valueOf(currentYear) + ": $" + userInput);
         }
 
         String outfile = ("TaxesPaid-" + millisec + ".txt");
         
-        // Open the writer with a transparent buffer to read the hashmap into
+        // Open the writer with a transparent buffer to read the array into
         try(Writer writer = new BufferedWriter(new FileWriter(outfile));){
-            writer.write("Taxes paid:\n");
+            writer.write("Taxes paid:");
+            writer.write(System.lineSeparator());
 
-            // iterate the hashmap
-            for (Map.Entry<Integer, String> entry :
-                taxesHM.entrySet()) {
-                // put key and value separated by a colon
-                writer.write(entry.getKey() + ": $" + entry.getValue());
+            for (String i : taxesPaidArray) {
+                writer.write(i);
                 writer.write(System.lineSeparator());
-            }
+              }
 
             writer.flush();
         }
