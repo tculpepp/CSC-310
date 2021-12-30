@@ -1,9 +1,3 @@
-// Write a Java application to accomplish the following task:
-
-// 1. Ask users to input the amount of tax they paid for the past 3 years.
-// 2. Write this information to a text file.
-
-// Once you finish the assignment, copy the Java program along with a screenshot of the output and paste it into a Word document. Submit the Word document to the SLP 1 dropbox.
 /**
 * The TaxesToFile program implements an application that
 * simply requests taxes paid for a number of years from the
@@ -18,7 +12,6 @@
 
 import javax.swing.JOptionPane;
 import java.util.Calendar;
-// import java.util.*;
 import java.util.regex.*;
 import java.io.*;
 public class TaxesToFile {
@@ -30,15 +23,15 @@ public class TaxesToFile {
         int yearsToCollect = 3; // number fo years of data to collect
         String[] taxesPaidArray = new String[3]; // array to hold user inputs
 
-        // sequentially request taxes paid from the user starting with current year and going backwards as required
+        // request taxes paid from the user starting with current year and going backwards as required by yearsToCollect
         for (int i = 0; i < yearsToCollect; i++) {
             int currentYear=year-i;
             userInput = JOptionPane.showInputDialog("Enter your taxes paid for " + currentYear + ":");
-            Pattern p = Pattern.compile("[A-Z,a-z,&%$#@!()*^]"); // allows only 0-9 and .
+            // validate the user input. If Invalid, notify and repeat iteration
+            Pattern p = Pattern.compile("[A-Za-z&%$#@!()*^ ]"); // allows only numbers plus , .
             Matcher m = p.matcher(userInput);
-            //If something other than a number was entered, notify the user and continue
-            if (m.find()){ 
-                JOptionPane.showMessageDialog(null, "Please enter only a number");
+            if (m.find() || userInput.isEmpty()){ 
+                JOptionPane.showMessageDialog(null, "Please enter a number");
                 i--;
                 continue;
             }
