@@ -28,7 +28,9 @@
 		"java.project.sourcePaths": [
 			"mod1/case1demo/src",
 			"mod1/case1/src",
-			"mod1/slp1/src"
+			"mod1/slp1/src",
+			"mod2/case2/src",
+			"mod2/slp2/src"
 		],
 		"java.project.referencedLibraries": [
 			"lib/**/*.jar",
