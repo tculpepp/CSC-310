@@ -11,72 +11,63 @@ Write a Java application that performs the following task:
 */
 
 import java.util.Random;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
-
 public class ArraySearch {
+    public static int[] binarySearch(int[] array, int high, int low, int target, int count) {
+        if (high >= low) {
+            int mid = low + (high - low)/2; //Find the middle ((high-low)/2) then offset for where low is (low + )
+            if (array[mid] == target) {
+                return new int[]{mid, count};
+            }
+            else if (array[mid] > target) { //eliminate the right sub-array and continue with the left sub-array
+                return binarySearch(array, mid - 1, low, target, count + 1); 
+            }
+            else { //mid < target, eliminate the left sub-array and continue with the right sub-array
+                return binarySearch(array, high, mid + 1, target, count + 1);
+            }
+        }
+        return new int[]{-1, count};
+    }
 
-    public static int binarySearch(int arr[], int first, int last, int key){  
-        if (last>=first){  
-            int mid = first + (last - first)/2;  
-            if (arr[mid] == key){  
-            return mid;  
-            }  
-            if (arr[mid] > key){  
-            return binarySearch(arr, first, mid-1, key);//search in left subarray  
-            }else{  
-            return binarySearch(arr, mid+1, last, key);//search in right subarray  
-            }  
-        }  
-        return -1;  
-    }  
-    // this code was copy pasta'd
+    public static int[] linearSearch(int[] array, int target) {
+        int i;
+        for (i=0; i < array.length; i++) {
+            if (array[i] == target) {
+                return new int[]{i, i + 1};
+            }
+        }
+        return new int[]{-1, i + 1};
+    }
+
     public static void main(String[] args) {
         Random randomNum = new Random();
-
         int [] randArray = new int[10]; //array to random array
         int i = 0;
         while (i < 10)  {  // loop to fill array with random int (1-100)
             randArray[i]= randomNum.nextInt(101);
-            System.out.println(randArray[i]);  
+            // System.out.println(randArray[i]);  
             i++;  
         }
+        // add array sorting
         String userInputs = JOptionPane.showInputDialog("Please input a whole number between 1-100");
         // add validation here
-        int userInt = Integer.parseInt(userInputs);
+        int target = Integer.parseInt(userInputs);
+        int[] intArray = new int[] {2,5,7,10,20,24,67,89,90,93,99,112};
+        int high = intArray.length - 1;
+        target = 67;
 
-        // JOptionPane.showMessageDialog(
-        //     null, "You input: "+ userInt);
+        //int[] result = binarySearch(intArray, high, 0, target, 1);
+        int[] result = linearSearch(intArray, target);
+    
+        if (result[0] == -1) {
+            System.out.println("Number not found in array");
+        }
+        else {
+            System.out.println("Number found at index " 
+                +result[0] + " in " + result[1] +" steps");
+        }
 
-        // System.out.println("i = "+i); 
-
-        // // write the search as a function and the output with the result
-        // for (i=0; i < randArray.length; i++) {
-        //     if (randArray[i] != userInt) {
-        //         System.out.println("Array: " + randArray[i] + " : target: " + userInt); //this is temporary
-        //     }
-        //     else if (randArray[i] == userInt) {
-        //         i++;
-        //         JOptionPane.showMessageDialog(
-        //             null, "Your number was found in the array. It took "
-        //             + i + " steps using a linear search");
-        //     }
-        //     else {
-        //         JOptionPane.showMessageDialog(
-        //             null, "something went wrong");
-        //     }
-        // }
-
-        //  binary search code here *************
-        int low = 0;
-        int high = randArray.length;
-        int mid = Math.floorDiv((low + high), 2);
-        int midValue = randArray[mid];
-        int count = 0;
-        System.out.println("low: " + low);
-        System.out.println("high: " + high);
-        System.out.println("mid: " + mid);
-        System.out.println("midValue: " + midValue);
-        
     }
 }
