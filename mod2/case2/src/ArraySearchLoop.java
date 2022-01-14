@@ -2,6 +2,21 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 public class ArraySearchLoop {
+
+    public static int[] selectionSort(int[] array) {
+        for (int i=0; i < array.length - 1; i++) {
+            int smallest = i;
+            for (int j = i + 1; j < array.length; j++){
+                if (array[j] < array[smallest]) {
+                    smallest = j;
+                }
+            }
+            int temp = array[smallest];
+            array[smallest] = array[i];
+            array[i] = temp;
+        }
+        return array;
+    }
     public static void main(String[] args) {
         int[] intArray = new Random().ints(10,0,101).toArray(); //create 10 int array between 1-100
 
@@ -9,6 +24,11 @@ public class ArraySearchLoop {
             System.out.println(value);
         }
         //insert sorting code here ******************
+        intArray = selectionSort(intArray);
+        System.out.println("********************");
+        for (int value : intArray){ //temporary debugging loop
+            System.out.println(value);
+        }   
         // Get and validate user input *****************
         int target = 0; //search target number
         int result = -1; //index of target number
