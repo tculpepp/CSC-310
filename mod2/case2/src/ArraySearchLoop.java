@@ -17,25 +17,41 @@ public class ArraySearchLoop {
         }
         return array;
     }
-    public static void main(String[] args) {
-        int[] intArray = new Random().ints(10,0,101).toArray(); //create 10 int array between 1-100
 
-        for (int value : intArray){ //temporary debugging loop
-            System.out.println(value);
+    public static int[] binarySearch (int[] array, int target) {
+        int high = (array.length) - 1;
+        int low = 0;
+        int count = 0;
+        while (high >= low) {
+            int mid = low + (high - low)/2; //Find the middle ((high-low)/2) then offset for where low is (low + )
+            count++;
+            if (array[mid] == target) {
+                return new int[]{mid, count};
+            }
+            else if (array[mid] > target) { //eliminate the right sub-array and continue with the left sub-array
+                high = mid - 1;
+            }
+            else { //mid < target, eliminate the left sub-array and continue with the right sub-array
+                low = mid + 1;
+            }
+        } 
+        return new int[]{-1, count};
+    }
+
+    public static int[] linearSearch(int[] array, int target) {
+        int i;
+        for (i=0; i < array.length; i++) {
+            if (array[i] == target) {
+                return new int[]{i, i + 1};
+            }
         }
-        //insert sorting code here ******************
-        intArray = selectionSort(intArray);
-        System.out.println("********************");
-        for (int value : intArray){ //temporary debugging loop
-            System.out.println(value);
-        }   
-        // Get and validate user input *****************
-        int target = 0; //search target number
-        int result = -1; //index of target number
-        int count = -1; //search step count
-        if (target <= 0) {
-            String userInput = JOptionPane.showInputDialog(
-                "Please input a number between 1-100");
+        return new int[]{-1, i + 1};
+    }
+
+    public static int userInteraction (String msg) {
+        int target = 0;
+        if (target < 1) {
+            String userInput = JOptionPane.showInputDialog(msg);
             if (userInput == null) { // Exit cleanly if user hits cancel
                 System.exit(0);
             }
@@ -47,46 +63,37 @@ public class ArraySearchLoop {
                     "Invalid Input, please try again.");
             }
         }
-        // Do Linear Search *************
-        for (int i=0; i < intArray.length; i++) {
-            if (intArray[i] == target) {
-                result = i;
-                count = i + 1;
-            }
-            else if (i == intArray.length) {
-                result = -1;
-            }
-        }
-        //display results***************
-        if (result == -1) {
+        return target;
+    }
+
+    public static void userInteraction (int index, int count) {
+        if (index == -1) {
             JOptionPane.showMessageDialog(null, "Number not found in array");
             System.exit(0);
         }
         else {
             JOptionPane.showMessageDialog(null, "Number found at index " 
-                + result + " in " + count + " steps");
+                + index + " in " + count + " steps");
         }
-        // Do Binary Search **************
-        int high = (intArray.length) - 1;
-        int low = 0;
-        while (high >= low) {
-            int mid = low + (high - low)/2; //Find the middle ((high-low)/2) then offset for where low is (low + )
-            count++;
-            if (intArray[mid] == target) {
-                result = mid;
-                break;
-            }
-            else if (intArray[mid] > target) { //eliminate the right sub-array and continue with the left sub-array
-                high = mid - 1;
-            }
-            else { //mid < target, eliminate the left sub-array and continue with the right sub-array
-                low = mid + 1;
-            }
-            if (high < low) { //if the array runs out without a match
-                result = -1;
-            }
-        }
-        JOptionPane.showMessageDialog(null, "Number found at index " 
-                + result + " in " + count + " steps");
+    }
+    public static void main(String[] args) {
+        int[] intArray = new Random().ints(10,0,101).toArray(); //create 10 int array between 1-100
+
+        intArray = selectionSort(intArray);
+        for (int value : intArray){ //temporary debugging loop
+            System.out.println(value);
+        }   
+
+        int target = userInteraction("Enter a number between 1-100"); //search target number
+        int index = -1; //index of target number
+        int count = -1; //search step count
+
+        int[] result = linearSearch(intArray, target);
+
+        userInteraction(result[0], result[1]);
+
+        result = binarySearch(intArray, target);
+
+        userInteraction(result[0],result[1]);
     }
 }
