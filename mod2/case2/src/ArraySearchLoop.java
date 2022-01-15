@@ -77,13 +77,9 @@ public class ArraySearchLoop {
         }
     }
     public static void main(String[] args) {
-        int[] intArray = new Random().ints(10,0,101).toArray(); //create 10 int array between 1-100
-
-        intArray = selectionSort(intArray);
+        int[] intArray = selectionSort(new Random().ints(10,0,101).toArray()); //create 10 int array between 1-100
 
         int target = userInteraction("Enter a number between 1-100"); //search target number
-        int index = -1; //index of target number
-        int count = -1; //search step count
 
         int[] result = linearSearch(intArray, target);
 
