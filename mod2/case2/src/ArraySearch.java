@@ -14,50 +14,6 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 public class ArraySearch {
-
-    public static int[] selectionSort(int[] array) {
-        for (int i=0; i < array.length - 1; i++) {
-            int smallest = i;
-            for (int j = i + 1; j < array.length; j++){
-                if (array[j] < array[smallest]) {
-                    smallest = j;
-                }
-            }
-            int temp = array[smallest];
-            array[smallest] = array[i];
-            array[i] = temp;
-        }
-        return array;
-    }
-
-    public static int userInteraction (String msg) {
-        int target = 0;
-        if (target < 1) {
-            String userInput = JOptionPane.showInputDialog(msg);
-            if (userInput == null) { // Exit cleanly if user hits cancel
-                System.exit(0);
-            }
-            try { //validate the input
-                target = Integer.parseInt(userInput);
-            }
-            catch (NumberFormatException e){
-                JOptionPane.showMessageDialog(null, 
-                    "Invalid Input, please try again.");
-            }
-        }
-        return target;
-    }
-
-    public static void userInteraction (int index, int count) {
-        if (index == -1) {
-            JOptionPane.showMessageDialog(null, "Number not found in array");
-            System.exit(0);
-        }
-        else {
-            JOptionPane.showMessageDialog(null, "Number found at index " 
-                + index + " in " + count + " steps");
-        }
-    }
     public static void main(String[] args) {
         //create 10 int array between 1-100 and sort it
         int[] intArray = selectionSort(new Random().ints(10,0,101).toArray());
@@ -102,5 +58,49 @@ public class ArraySearch {
             }
         }
         userInteraction(index, count);
+    }
+
+    public static int[] selectionSort(int[] array) {
+        for (int i=0; i < array.length - 1; i++) {
+            int smallest = i;
+            for (int j = i + 1; j < array.length; j++){
+                if (array[j] < array[smallest]) {
+                    smallest = j;
+                }
+            }
+            int temp = array[smallest];
+            array[smallest] = array[i];
+            array[i] = temp;
+        }
+        return array;
+    }
+
+    public static int userInteraction (String msg) {
+        int target = 0;
+        if (target < 1) {
+            String userInput = JOptionPane.showInputDialog(msg);
+            if (userInput == null) { // Exit cleanly if user hits cancel
+                System.exit(0);
+            }
+            try { //validate the input
+                target = Integer.parseInt(userInput);
+            }
+            catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(null, 
+                    "Invalid Input, please try again.");
+            }
+        }
+        return target;
+    }
+
+    public static void userInteraction (int index, int count) {
+        if (index == -1) {
+            JOptionPane.showMessageDialog(null, "Number not found in array");
+            System.exit(0);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Number found at index " 
+                + index + " in " + count + " steps");
+        }
     }
 }
