@@ -41,7 +41,7 @@ public class ArraySearch {
         int low = 0;
         while (high >= low) {
             //Find the middle ((high-low)/2) & offset for where low is (low + )
-            int mid = low + (high - low)/2;
+            int mid = (high + low) / 2;
             count++;
             if (intArray[mid] == target) {
                 index = mid;
