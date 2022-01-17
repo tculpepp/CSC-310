@@ -60,7 +60,7 @@ public class ArraySearch {
         userInteraction(index, count);
     }
 
-    public static int[] selectionSort(int[] array) {
+    private static int[] selectionSort(int[] array) {
         for (int i=0; i < array.length - 1; i++) {
             int smallest = i;
             for (int j = i + 1; j < array.length; j++){
@@ -75,7 +75,7 @@ public class ArraySearch {
         return array;
     }
 
-    public static int userInteraction (String msg) {
+    private static int userInteraction (String msg) {
         int target = 0;
         if (target < 1) {
             String userInput = JOptionPane.showInputDialog(msg);
@@ -93,7 +93,7 @@ public class ArraySearch {
         return target;
     }
 
-    public static void userInteraction (int index, int count) {
+    private static void userInteraction (int index, int count) {
         if (index == -1) {
             JOptionPane.showMessageDialog(null, "Number not found in array");
             System.exit(0);
