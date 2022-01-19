@@ -27,7 +27,6 @@ class FindClosestNumber {
                 low = mid;
             }
         }
-        //IF (array[low] - value) <= (value - array[high]) {array[low]} ELSE {array[high]}
         return Math.abs(array[low] - target) <= Math.abs(target - array[high]) ? array[low] : array[high];
     }
         public static void main(String[] args)
