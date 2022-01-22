@@ -8,23 +8,41 @@ Write a program for a real estate agent. The program should perform the followin
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 
 public class HomeValue {
     public static void main(String[] args) throws Exception {
         int[][] homeValues = csvToArray("AverageHomeValues2021-1997.csv");
-        int target = 200000;
+        String introString = "This program will calculate the ideal home \n"+
+            "purchase year between "+homeValues[0][0]+" - "
+            +homeValues[homeValues.length-1][0]+".\nPlease enter your desired price.";
+        int target = 0;
+        if (target < 1) {
+            String userInput = JOptionPane.showInputDialog(introString);
+            if (userInput == null) { // Exit cleanly if user hits cancel
+                System.exit(0);
+            }
+            try { //validate the input
+                target = Integer.parseInt(userInput);
+            }
+            catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(null, 
+                    "Invalid Input, please try again.");
+            }
+        }
         int bestYear = binarySearchClosest(homeValues, target);
-        System.out.println(bestYear);
-
+        JOptionPane.showMessageDialog(null, "The ideal year for you to "+
+                                    "purchase a home was "+bestYear);
     }
+
     private static int[][] csvToArray(String filename) throws IOException {
         int[][] outArray = new int[25][2];
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            String strCurrentLine;
+            String currentLine;
             int i = 0;
-            while ((strCurrentLine = br.readLine()) != null) {
-                outArray[i][0] = Integer.parseInt(strCurrentLine.split(",")[0]);
-                outArray[i][1] = Integer.parseInt(strCurrentLine.split(",")[1]);
+            while ((currentLine = br.readLine()) != null) {
+                outArray[i][0] = Integer.parseInt(currentLine.split(",")[0]);
+                outArray[i][1] = Integer.parseInt(currentLine.split(",")[1]);
                 i++;
             }
         } catch (IOException e) {
