@@ -36,6 +36,10 @@
 			"lib/**/*.jar",
 			"mod1/slp1/lib/junit-platform-console-standalone-1.8.2.jar",
 			"junit-platform-console-standalone-1.8.2.jar"
-		]
+		],
+		"editor.defaultFormatter": "redhat.java",
+		"editor.formatOnPaste": true,
+		"editor.formatOnSave": true,
+		"java.format.settings.url": "~/.vscode/eclipse-java-google-style.xml"
 	}
 }
