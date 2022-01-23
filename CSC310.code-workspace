@@ -30,7 +30,9 @@
 			"mod1/case1/src",
 			"mod1/slp1/src",
 			"mod2/case2/src",
-			"mod2/slp2/src"
+			"mod2/slp2/src",
+			"mod3/case3/src",
+			"mod3/slp3/src"
 		],
 		"java.project.referencedLibraries": [
 			"lib/**/*.jar",
