@@ -4,6 +4,33 @@
  * the numbers.
  */
 
-public class ArrayLists {
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.stream.Collectors;
 
+public class ArrayLists {
+    public static void main(String[] args) {
+        // random int stream boxed to integer and loaded into ArrayList
+        ArrayList<Integer> randomIntegers = new Random().ints(10, 0, 100).boxed()
+                .collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<Integer> sortedInts = selectionSort(randomIntegers);
+        System.out.println("done");
+    }
+
+    private static ArrayList<Integer> selectionSort(ArrayList<Integer> arrayList) {
+        for (int i = 0; i < arrayList.size() - 1; i++) {
+            int smallest = i;
+            for (int j = i + 1; j < arrayList.size(); j++) {
+                if (arrayList.get(j) < arrayList.get(smallest)) {
+                    smallest = j;
+                }
+            }
+            int temp = arrayList.get(smallest);
+            arrayList.set(smallest, arrayList.get(i));
+            arrayList.set(i, temp);
+        }
+        return arrayList;
+    }
 }
+
+
