@@ -7,14 +7,26 @@
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.Collectors;
+import javax.swing.JOptionPane;
 
 public class ArrayLists {
     public static void main(String[] args) {
-        // random int stream boxed to integer and loaded into ArrayList
-        ArrayList<Integer> randomIntegers = new Random().ints(10, 0, 100).boxed()
-                .collect(Collectors.toCollection(ArrayList::new));
-        ArrayList<Integer> sortedInts = selectionSort(randomIntegers);
-        System.out.println("done");
+        // random int stream boxed to integer and loaded into ArrayList, pass it through a sort
+        ArrayList<Integer> randomIntegers = selectionSort(new Random().ints(10, 0, 100).boxed()
+                .collect(Collectors.toCollection(ArrayList::new)));
+        StringBuilder valuesToString = new StringBuilder(10); //
+        int valueSum = 0; // placeholder for sum of values
+        for (Integer value : randomIntegers) {
+            valueSum += value; // start totaling values
+            valuesToString.append(String.valueOf(value) + ", "); // build output string
+        }
+        // chop the last commma off the string
+        valuesToString = valuesToString.deleteCharAt(valuesToString.length() - 2);
+        JOptionPane.showMessageDialog(null,
+                "This program generated the following random numbers:\n" +
+                        valuesToString + "\n" +
+                        "Sum of the values: " + valueSum + "\n" +
+                        "Average of the values: " + (valueSum / randomIntegers.size()));
     }
 
     private static ArrayList<Integer> selectionSort(ArrayList<Integer> arrayList) {
@@ -32,5 +44,3 @@ public class ArrayLists {
         return arrayList;
     }
 }
-
-

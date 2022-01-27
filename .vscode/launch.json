@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ArrayLists",
+            "request": "launch",
+            "mainClass": "ArrayLists",
+            "projectName": "CSC 310_87e24cdc"
+        },
+        {
+            "type": "java",
             "name": "Launch FindClosestNumber",
             "request": "launch",
             "mainClass": "FindClosestNumber",
