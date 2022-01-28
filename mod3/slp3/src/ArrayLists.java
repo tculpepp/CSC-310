@@ -20,7 +20,7 @@ public class ArrayLists {
             valueSum += value; // start totaling values
             valuesToString.append(String.valueOf(value) + ", "); // build output string
         }
-        // chop the last commma off the string
+        // chop the last comma off the string
         valuesToString = valuesToString.deleteCharAt(valuesToString.length() - 2);
         JOptionPane.showMessageDialog(null,
                 "This program generated the following random numbers:\n" +
