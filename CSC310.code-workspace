@@ -26,12 +26,10 @@
 		},
 		"peacock.color": "#1857a4",
 		"java.project.sourcePaths": [
+			"mod2/slp2/src",
+			"mod1/slp1/src",
 			"mod1/case1demo/src",
 			"mod1/case1/src",
-			"mod1/slp1/src",
-			"mod2/case2/src",
-			"mod2/slp2/src",
-			"mod3/case3/src",
 			"mod3/slp3/src"
 		],
 		"java.project.referencedLibraries": [
