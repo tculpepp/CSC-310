@@ -1,0 +1,77 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch ArrayLists",
+            "request": "launch",
+            "mainClass": "ArrayLists",
+            "projectName": "CSC 310_87e24cdc"
+        },
+        {
+            "type": "java",
+            "name": "Launch FindClosestNumber",
+            "request": "launch",
+            "mainClass": "FindClosestNumber",
+            "projectName": "CSC 310_87e24cdc"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch ArraySearch",
+            "request": "launch",
+            "mainClass": "ArraySearch",
+            "projectName": "CSC 310_87e24cdc"
+        },
+        {
+            "type": "java",
+            "name": "Launch ArraySearch2",
+            "request": "launch",
+            "mainClass": "ArraySearch2",
+            "projectName": "CSC 310_87e24cdc"
+        },
+        {
+            "type": "java",
+            "name": "Launch ArraySearchLoop",
+            "request": "launch",
+            "mainClass": "ArraySearchLoop",
+            "projectName": "CSC 310_87e24cdc"
+        },
+        {
+            "type": "java",
+            "name": "Launch CalcTaxes",
+            "request": "launch",
+            "mainClass": "CalcTaxes",
+            "projectName": "CSC 310_87e24cdc"
+        },
+        {
+            "type": "java",
+            "name": "Launch GasStationMessageBox",
+            "request": "launch",
+            "mainClass": "GasStationMessageBox",
+            "projectName": "CSC 310_87e24cdc"
+        },
+        {
+            "type": "java",
+            "name": "Launch HomeValue",
+            "request": "launch",
+            "mainClass": "HomeValue",
+            "projectName": "CSC 310_87e24cdc"
+        },
+        {
+            "type": "java",
+            "name": "Launch TaxesToFile",
+            "request": "launch",
+            "mainClass": "TaxesToFile",
+            "projectName": "CSC 310_87e24cdc"
+        }
+    ]
+}
