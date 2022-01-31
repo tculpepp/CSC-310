@@ -7,6 +7,7 @@
  * Hint:Create a class or data structure hold a student first name, last name, the student's4 test
  * scores, and letter grade. Then create your ArrayList to hold objects of this type.
  */
+import java.lang.Math;
 
 public class Student {
     String firstName;
@@ -15,7 +16,7 @@ public class Student {
     int score2;
     int score3;
     int score4;
-    int avg;
+    Double avg;
     char grade;
 
     public Student(String firstName, String lastName, int score1,
@@ -29,7 +30,7 @@ public class Student {
     }
 
     void calcAvg() {
-        avg = ((this.score1 + this.score2 + this.score3 + this.score4) / 4);
+        avg = ((this.score1 + this.score2 + this.score3 + this.score4) / (double) 4);
     }
 
     void getGrade() {
