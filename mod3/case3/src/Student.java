@@ -34,15 +34,15 @@ public class Student {
     }
 
     void getGrade() {
-        if (this.avg > 89) {
+        if (this.avg >= 90) {
             grade = 'A';
-        } else if (this.avg < 90 && this.avg > 79) {
-            grade = 'B';
-        } else if (this.avg < 80 && this.avg > 69) {
+        } else if (this.avg >= 80) {
+            grade = 'B'; 
+        } else if (this.avg >= 70) {
             grade = 'C';
-        } else if (this.avg < 70 && this.avg > 59) {
+        } else if (this.avg >= 60) {
             grade = 'D';
-        } else if (this.avg < 60) {
+        } else {
             grade = 'F';
         }
     }
