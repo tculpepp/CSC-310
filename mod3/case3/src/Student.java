@@ -7,7 +7,8 @@
  * Hint:Create a class or data structure hold a student first name, last name, the student's4 test
  * scores, and letter grade. Then create your ArrayList to hold objects of this type.
  */
-import java.lang.Math;
+import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 public class Student {
     String firstName;
@@ -27,6 +28,8 @@ public class Student {
         this.score2 = score2;
         this.score3 = score3;
         this.score4 = score4;
+        calcAvg();
+        getGrade();
     }
 
     void calcAvg() {
@@ -37,7 +40,7 @@ public class Student {
         if (this.avg >= 90) {
             grade = 'A';
         } else if (this.avg >= 80) {
-            grade = 'B'; 
+            grade = 'B';
         } else if (this.avg >= 70) {
             grade = 'C';
         } else if (this.avg >= 60) {
@@ -47,11 +50,29 @@ public class Student {
         }
     }
 
+    public String toString() {
+        return ("Name: " + lastName + ", " + firstName + "\n" +
+                "Scores: " + score1 + "\t" + score2 + "\t" + score3 + "\t" + score4 + "\n" +
+                "Average: " + avg + "\n" +
+                "Grade: " + grade + "\n\n");
+    }
+
     public static void main(String[] args) {
-        Student student1 = new Student("steve", "jones", 95, 45, 67, 83);
-        student1.calcAvg();
-        student1.getGrade();
-        System.out.println(student1.toString());
+        ArrayList<Object> classGrades = new ArrayList<>(10);
+        classGrades.add(new Student("Steve", "Jones", 95, 45, 67, 83));
+        classGrades.add(new Student("Currey", "Skittrell", 84, 91, 89, 97));
+        classGrades.add(new Student("Phip", "Webbe", 81, 68, 51, 94));
+        classGrades.add(new Student("Idaline", "Prince", 74, 74, 71, 100));
+        classGrades.add(new Student("Deloria", "Leamon", 55, 92, 67, 87));
+        classGrades.add(new Student("Ulrikaumeko", "Tosspell", 97, 65, 94, 55));
+        classGrades.add(new Student("Lilllie", "Divill", 64, 71, 98, 54));
+        classGrades.add(new Student("Alexio", "Jakubovicz", 93, 90, 50, 55));
+        classGrades.add(new Student("Faina", "O'Concannon", 95, 89, 84, 96));
+        StringBuilder classReport = new StringBuilder();
+        for (Object student : classGrades) {
+            classReport.append(student.toString());
+        }
+        JOptionPane.showMessageDialog(null, classReport);
     }
 
 }
