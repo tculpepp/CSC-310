@@ -9,6 +9,7 @@
  */
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
+import java.util.regex.*;
 
 public class Student {
     String firstName;
@@ -59,10 +60,17 @@ public class Student {
 
     public static void main(String[] args) {
         ArrayList<Object> classGrades = new ArrayList<>(10);
+        String[] scores = new String[4];
         String[] studentName =
                 JOptionPane.showInputDialog("Student Name (Last, First):").split(", ");
-        String[] scores =
-                JOptionPane.showInputDialog("Last 4 Test Scores:\n(01, 02, 03, 04)").split(", ");
+        String scoresString =
+                JOptionPane.showInputDialog("Last 4 Test Scores:\n(01, 02, 03, 04)");
+        Pattern p = Pattern.compile("^?\\d{2}\\,\\s\\d{2}\\,\\s\\d{2}\\,\\s\\d{2}$");
+        Matcher m = p.matcher(scoresString);
+        if (m.find()) {
+            System.out.println("regex match found");
+            scores = scoresString.split(", ");
+        }
         classGrades.add(new Student(studentName[0], studentName[1], Integer.parseInt(scores[0]),
                 Integer.parseInt(scores[1]), Integer.parseInt(scores[2]),
                 Integer.parseInt(scores[3])));
