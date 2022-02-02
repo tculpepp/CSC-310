@@ -20,10 +20,10 @@ public class Student {
     Double avg;
     char grade;
 
-    public Student(String firstName, String lastName, int score1,
+    public Student(String lastName, String firstName, int score1,
             int score2, int score3, int score4) {
-        this.firstName = firstName;
         this.lastName = lastName;
+        this.firstName = firstName;
         this.score1 = score1;
         this.score2 = score2;
         this.score3 = score3;
@@ -59,6 +59,13 @@ public class Student {
 
     public static void main(String[] args) {
         ArrayList<Object> classGrades = new ArrayList<>(10);
+        String[] studentName =
+                JOptionPane.showInputDialog("Student Name (Last, First):").split(", ");
+        String[] scores =
+                JOptionPane.showInputDialog("Last 4 Test Scores:\n(01, 02, 03, 04)").split(", ");
+        classGrades.add(new Student(studentName[0], studentName[1], Integer.parseInt(scores[0]),
+                Integer.parseInt(scores[1]), Integer.parseInt(scores[2]),
+                Integer.parseInt(scores[3])));
         classGrades.add(new Student("Steve", "Jones", 95, 45, 67, 83));
         classGrades.add(new Student("Currey", "Skittrell", 84, 91, 89, 97));
         classGrades.add(new Student("Phip", "Webbe", 81, 68, 51, 94));
