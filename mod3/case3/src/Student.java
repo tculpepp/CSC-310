@@ -29,25 +29,17 @@ public class Student {
         this.score2 = score2;
         this.score3 = score3;
         this.score4 = score4;
-        calcAvg();
-        getGrade();
-    }
-
-    void calcAvg() {
-        avg = ((this.score1 + this.score2 + this.score3 + this.score4) / (double) 4);
-    }
-
-    void getGrade() {
+        this.avg = ((score1 + score2 + score3 + score4) / (double) 4);
         if (this.avg >= 90) {
-            grade = 'A';
+            this.grade = 'A';
         } else if (this.avg >= 80) {
-            grade = 'B';
+            this.grade = 'B';
         } else if (this.avg >= 70) {
-            grade = 'C';
+            this.grade = 'C';
         } else if (this.avg >= 60) {
-            grade = 'D';
+            this.grade = 'D';
         } else {
-            grade = 'F';
+            this.grade = 'F';
         }
     }
 
@@ -83,31 +75,15 @@ public class Student {
 
     public static void main(String[] args) {
         ArrayList<Object> classGrades = new ArrayList<>(10);
-        String[] scores = new String[4];
         boolean addAnother = true;
         while (addAnother) {
-            boolean exitLoop = false;
-            while (!exitLoop) {
-                String rawStudentName =
-                        JOptionPane.showInputDialog("Student Name (Last, First):");
-                if (!validateUserInput("^[A-Za-z]*\\,\\s[A-Za-z]*$", rawStudentName,
-                        "regex match NOT found for name, please try again")) {
-                    continue;
-                } else {
-                    exitLoop = true;
-                }
-            }
-            String[] studentName = rawStudentName.split(", ");
-
-            String scoresString =
-                    JOptionPane.showInputDialog("Last 4 Test Scores:\n(01, 02, 03, 04)");
-
-            if (!validateUserInput("^?\\d{1,3}\\,\\s\\d{1,3}\\,\\s\\d{1,3}\\,\\s\\d{1,3}$",
-                    scoresString,
-                    "Invalid entry format please use: 'num, num, num, num")) {
-                continue;
-            }
-            scores = scoresString.split(", ");
+            String[] studentName = getUserInput(
+                    "Student Name (Last, First):", "^[A-Za-z]*\\,(\\s)?[A-Za-z]*$",
+                    "regex match NOT found for name, please try again");
+            String[] scores = getUserInput(
+                    "Last 4 Test Scores:\n(01, 02, 03, 04)",
+                    "^?\\d{1,3}\\,(\\s)?\\d{1,3}\\,(\\s)?\\d{1,3}\\,(\\s)?\\d{1,3}$",
+                    "Invalid entry format please use: 'num, num, num, num'");
             classGrades.add(new Student(studentName[0], studentName[1],
                     Integer.parseInt(scores[0]), Integer.parseInt(scores[1]),
                     Integer.parseInt(scores[2]), Integer.parseInt(scores[3])));
@@ -117,15 +93,6 @@ public class Student {
                 addAnother = false;
             }
         }
-        classGrades.add(new Student("Steve", "Jones", 95, 45, 67, 83));
-        classGrades.add(new Student("Currey", "Skittrell", 84, 91, 89, 97));
-        classGrades.add(new Student("Phip", "Webbe", 81, 68, 51, 94));
-        classGrades.add(new Student("Idaline", "Prince", 74, 74, 71, 100));
-        classGrades.add(new Student("Deloria", "Leamon", 55, 92, 67, 87));
-        classGrades.add(new Student("Ulrikaumeko", "Tosspell", 97, 65, 94, 55));
-        classGrades.add(new Student("Lilllie", "Divill", 64, 71, 98, 54));
-        classGrades.add(new Student("Alexio", "Jakubovicz", 93, 90, 50, 55));
-        classGrades.add(new Student("Faina", "O'Concannon", 95, 89, 84, 96));
         StringBuilder classReport = new StringBuilder();
         for (Object student : classGrades) {
             classReport.append(student.toString());
