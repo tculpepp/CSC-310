@@ -58,22 +58,65 @@ public class Student {
                 "Grade: " + grade + "\n\n");
     }
 
+    private static boolean validateUserInput(String pattern, String userInput,
+            String errorMessage) {
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(userInput);
+        if (m.find()) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, errorMessage);
+            return false;
+        }
+    }
+
+    private static String[] getUserInput(String requestMessage, String validationPattern,
+            String errorMessage) {
+        while (true) {
+            String rawUserInput = JOptionPane.showInputDialog(requestMessage);
+            if (!validateUserInput(validationPattern, rawUserInput, errorMessage)) {
+                continue;
+            }
+            return rawUserInput.split(",(\\s)?");
+        }
+    }
+
     public static void main(String[] args) {
         ArrayList<Object> classGrades = new ArrayList<>(10);
         String[] scores = new String[4];
-        String[] studentName =
-                JOptionPane.showInputDialog("Student Name (Last, First):").split(", ");
-        String scoresString =
-                JOptionPane.showInputDialog("Last 4 Test Scores:\n(01, 02, 03, 04)");
-        Pattern p = Pattern.compile("^?\\d{2}\\,\\s\\d{2}\\,\\s\\d{2}\\,\\s\\d{2}$");
-        Matcher m = p.matcher(scoresString);
-        if (m.find()) {
-            System.out.println("regex match found");
+        boolean addAnother = true;
+        while (addAnother) {
+            boolean exitLoop = false;
+            while (!exitLoop) {
+                String rawStudentName =
+                        JOptionPane.showInputDialog("Student Name (Last, First):");
+                if (!validateUserInput("^[A-Za-z]*\\,\\s[A-Za-z]*$", rawStudentName,
+                        "regex match NOT found for name, please try again")) {
+                    continue;
+                } else {
+                    exitLoop = true;
+                }
+            }
+            String[] studentName = rawStudentName.split(", ");
+
+            String scoresString =
+                    JOptionPane.showInputDialog("Last 4 Test Scores:\n(01, 02, 03, 04)");
+
+            if (!validateUserInput("^?\\d{1,3}\\,\\s\\d{1,3}\\,\\s\\d{1,3}\\,\\s\\d{1,3}$",
+                    scoresString,
+                    "Invalid entry format please use: 'num, num, num, num")) {
+                continue;
+            }
             scores = scoresString.split(", ");
+            classGrades.add(new Student(studentName[0], studentName[1],
+                    Integer.parseInt(scores[0]), Integer.parseInt(scores[1]),
+                    Integer.parseInt(scores[2]), Integer.parseInt(scores[3])));
+            int reply = JOptionPane.showConfirmDialog(null, "Would you like to calculate more?",
+                    "Run Again?", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.NO_OPTION) {
+                addAnother = false;
+            }
         }
-        classGrades.add(new Student(studentName[0], studentName[1], Integer.parseInt(scores[0]),
-                Integer.parseInt(scores[1]), Integer.parseInt(scores[2]),
-                Integer.parseInt(scores[3])));
         classGrades.add(new Student("Steve", "Jones", 95, 45, 67, 83));
         classGrades.add(new Student("Currey", "Skittrell", 84, 91, 89, 97));
         classGrades.add(new Student("Phip", "Webbe", 81, 68, 51, 94));
