@@ -66,6 +66,9 @@ public class Student {
             String errorMessage) {
         while (true) {
             String rawUserInput = JOptionPane.showInputDialog(requestMessage);
+            if (rawUserInput == null) { // Exit cleanly if user hits cancel
+                System.exit(0);
+            }
             if (!validateUserInput(validationPattern, rawUserInput, errorMessage)) {
                 continue;
             }
