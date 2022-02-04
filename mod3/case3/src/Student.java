@@ -9,7 +9,10 @@
  */
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
-import java.util.regex.*;
+import java.util.Collections;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+import java.util.Comparator;
 
 public class Student {
     String firstName;
@@ -77,30 +80,34 @@ public class Student {
     }
 
     public static void main(String[] args) {
-        ArrayList<Object> classGrades = new ArrayList<>(10);
+        ArrayList<Student> classGrades = new ArrayList<>(10); // to hold student objects
         boolean addAnother = true;
+        JOptionPane.showMessageDialog(null,
+                "This program will collect student names and test scores\nand then report averages and grades for each student.");
         while (addAnother) {
+            // regex matches "name, name"
             String[] studentName = getValidUserInput(
                     "Student Name (Last, First):", "^[A-Za-z]*\\,(\\s)?[A-Za-z]*$",
-                    "regex match NOT found for name, please try again");
+                    "Invalid Entry.\nPlease enter 'Last, First'");
+            // regex matches csv format for 4 ints between 0-100
             String[] scores = getValidUserInput(
                     "Last 4 Test Scores:\n(01, 02, 03, 04)",
                     "^?\\d{1,3}\\,(\\s)?\\d{1,3}\\,(\\s)?\\d{1,3}\\,(\\s)?\\d{1,3}$",
-                    "Invalid entry format please use: 'num, num, num, num'");
+                    "Invalid entry format.\nPlease enter only whole numbers separated by commas");
             classGrades.add(new Student(studentName[0], studentName[1],
                     Integer.parseInt(scores[0]), Integer.parseInt(scores[1]),
                     Integer.parseInt(scores[2]), Integer.parseInt(scores[3])));
-            int reply = JOptionPane.showConfirmDialog(null, "Would you like to calculate more?",
-                    "Run Again?", JOptionPane.YES_NO_OPTION);
+            int reply =
+                    JOptionPane.showConfirmDialog(null, "Would you like to add another student?",
+                            "Add Another?", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.NO_OPTION) {
                 addAnother = false;
             }
         }
-        StringBuilder classReport = new StringBuilder();
-        for (Object student : classGrades) {
+        StringBuilder classReport = new StringBuilder(); // create the string for output
+        for (Student student : classGrades) {
             classReport.append(student.toString());
         }
         JOptionPane.showMessageDialog(null, classReport);
     }
-
 }
