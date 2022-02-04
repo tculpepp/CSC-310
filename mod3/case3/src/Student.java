@@ -78,7 +78,7 @@ public class Student {
     }
 
     public static void main(String[] args) {
-        ArrayList<Student> classGrades = new ArrayList<Student>(10); // to hold student objects
+        ArrayList<Student> classGrades = new ArrayList<>(10); // to hold student objects
         boolean addAnother = true;
         JOptionPane.showMessageDialog(null,
                 "This program will collect student names and test scores\nand then report averages and grades for each student.");
