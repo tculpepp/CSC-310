@@ -9,10 +9,8 @@
  */
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-import java.util.Comparator;
 
 public class Student {
     String firstName;
@@ -80,7 +78,7 @@ public class Student {
     }
 
     public static void main(String[] args) {
-        ArrayList<Student> classGrades = new ArrayList<>(10); // to hold student objects
+        ArrayList<Student> classGrades = new ArrayList<Student>(10); // to hold student objects
         boolean addAnother = true;
         JOptionPane.showMessageDialog(null,
                 "This program will collect student names and test scores\nand then report averages and grades for each student.");
