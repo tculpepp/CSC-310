@@ -62,7 +62,7 @@ public class Student {
         }
     }
 
-    private static String[] getUserInput(String requestMessage, String validationPattern,
+    private static String[] getValidUserInput(String requestMessage, String validationPattern,
             String errorMessage) {
         while (true) {
             String rawUserInput = JOptionPane.showInputDialog(requestMessage);
@@ -80,10 +80,10 @@ public class Student {
         ArrayList<Object> classGrades = new ArrayList<>(10);
         boolean addAnother = true;
         while (addAnother) {
-            String[] studentName = getUserInput(
+            String[] studentName = getValidUserInput(
                     "Student Name (Last, First):", "^[A-Za-z]*\\,(\\s)?[A-Za-z]*$",
                     "regex match NOT found for name, please try again");
-            String[] scores = getUserInput(
+            String[] scores = getValidUserInput(
                     "Last 4 Test Scores:\n(01, 02, 03, 04)",
                     "^?\\d{1,3}\\,(\\s)?\\d{1,3}\\,(\\s)?\\d{1,3}\\,(\\s)?\\d{1,3}$",
                     "Invalid entry format please use: 'num, num, num, num'");
