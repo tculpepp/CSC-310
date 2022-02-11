@@ -9,20 +9,22 @@
  * 
  * 4. Display all elements in the vector.
  */
-import java.util.*;
+import java.util.Vector;
+import java.util.Random;
 
 public class VectorDemo {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Vector<Integer> integerVector = new Vector<>(10, 2);
-        integerVector.add(134);
-        integerVector.add(297);
-        System.out.println(integerVector.size());
-        integerVector.add(134);
-        integerVector.add(134);
-        integerVector.add(134);
-        integerVector.add(134);
-        integerVector.add(134);
-        integerVector.add(134);
-        System.out.println("Hello, World!");
+        addIntToVector(2, integerVector);
+        addIntToVector(6, integerVector);
+        System.out.println("The elements in the Vector are: " + integerVector);
+    }
+
+    private static void addIntToVector(int qtyToAdd, Vector vector) {
+        Random rand = new Random();
+        for (int i = 0; i < qtyToAdd; i++) {
+            vector.add(rand.nextInt(1001));
+        }
+        System.out.println("The Vector size is: " + vector.size());
     }
 }
