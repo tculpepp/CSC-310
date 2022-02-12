@@ -10,6 +10,6 @@
 
 public class LinkedListDemo {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        System.out.println("Hello, case4!");
     }
 }
