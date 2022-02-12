@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch LinkedListDemo",
+            "request": "launch",
+            "mainClass": "LinkedListDemo",
+            "projectName": "CSC 310_e2336d29"
+        },
+        {
+            "type": "java",
             "name": "Launch VectorDemo",
             "request": "launch",
             "mainClass": "VectorDemo",
